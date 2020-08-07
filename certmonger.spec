@@ -1,10 +1,13 @@
 Name:                   certmonger
-Version:                0.79.8
-Release:                3
+Version:                0.79.11
+Release:                1
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
 Source0:                https://pagure.io/certmonger/archive/certmonger-%{version}/certmonger-certmonger-%{version}.tar.gz
+
+Patch0001:              Don-t-free-soptions-while-it-is-still-needed.patch
+
 BuildRequires:          autoconf automake gettext-devel gcc openldap-devel krb5-devel
 BuildRequires:          libidn2-devel dbus-devel nspr-devel nss-devel openssl-devel
 BuildRequires:          libuuid-devel libtalloc-devel libtevent-devel libcurl-devel
@@ -106,5 +109,8 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Thu Aug 06 2020 lingsheng <lingsheng@huawei.com> - 0.79.11-1
+- Update to 0.79.11
+
 * Thu May 14 2020 Jeffery.Gao <gaojianxing@huawei.com> - 0.79.8-3
 - Package init
