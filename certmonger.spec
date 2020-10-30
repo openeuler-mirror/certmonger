@@ -1,6 +1,6 @@
 Name:                   certmonger
 Version:                0.79.11
-Release:                1
+Release:                2
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
@@ -13,7 +13,7 @@ BuildRequires:          libidn2-devel dbus-devel nspr-devel nss-devel openssl-de
 BuildRequires:          libuuid-devel libtalloc-devel libtevent-devel libcurl-devel
 BuildRequires:          libxml2-devel xmlrpc-c-devel systemd-units diffutils expect
 BuildRequires:          nss-tools openssl /usr/bin/dbus-launch /usr/bin/dos2unix
-BuildRequires:          /usr/bin/unix2dos /usr/bin/which python2-dbus popt-devel
+BuildRequires:          /usr/bin/unix2dos /usr/bin/which python3-dbus popt-devel
 Requires:               dbus
 Requires(post):         %{_bindir}/dbus-send systemd-units
 Requires(preun):        systemd-units dbus sed
@@ -109,6 +109,9 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Tue Oct 27 2020 leiju <leiju4@huawei.com> - 0.79.11-2
+- Modify BuildRequires from python2-dbus to python3-dbus
+
 * Thu Aug 06 2020 lingsheng <lingsheng@huawei.com> - 0.79.11-1
 - Update to 0.79.11
 
