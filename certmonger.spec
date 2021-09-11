@@ -1,6 +1,6 @@
 Name:                   certmonger
 Version:                0.79.11
-Release:                3
+Release:                4
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
@@ -26,7 +26,6 @@ system enrolled with a certificate authority (CA) and keeping it enrolled.
 
 %package help
 Summary:             Documentation for help using certmonger
-provides:            certmonger = %{version}-%{release}
 
 %description help
 This package provides docs for user of certmonger.
@@ -109,6 +108,9 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Sat Sep 11 2021 wutao <wutao61@huawei.com> - 0.79.11-4
+- delete help package provides certmonger to solve conflicts
+
 * Mon May 31 2021 baizhonggui <baizhonggui@huawei.com> - 0.79.11-3
 - %prep no longer patch with git
 
