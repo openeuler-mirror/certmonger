@@ -1,6 +1,6 @@
 Name:                   certmonger
 Version:                0.79.11
-Release:                2
+Release:                3
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
@@ -32,7 +32,7 @@ provides:            certmonger = %{version}-%{release}
 This package provides docs for user of certmonger.
 
 %prep
-%autosetup -n certmonger-certmonger-%{version} -p1 -S git
+%autosetup -n certmonger-certmonger-%{version} -p1
 
 %build
 autoreconf -i -f
@@ -109,6 +109,9 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Mon May 31 2021 baizhonggui <baizhonggui@huawei.com> - 0.79.11-3
+- %prep no longer patch with git
+
 * Tue Oct 27 2020 leiju <leiju4@huawei.com> - 0.79.11-2
 - Modify BuildRequires from python2-dbus to python3-dbus
 
