@@ -1,6 +1,11 @@
+%global vendor %{?_vendor:%{_vendor}}%{!?_vendor:openEuler}
+%if "%{vendor}" == "openEuler"
+%define vendor openeuler
+%endif
+
 Name:                   certmonger
 Version:                0.79.11
-Release:                4
+Release:                5
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
@@ -58,12 +63,12 @@ if test $1 -eq 1 ; then
 fi
 %triggerin -- certmonger < 0.58
 if test $1 -gt 1 ; then
-    objpath=`dbus-send --system --reply-timeout=10000 --dest=org.openeulerhosted.certmonger \
-    --print-reply=o /org/openeulerhosted/certmonger org.openeulerhosted.certmonger.find_ca_by_nickname \
+    objpath=`dbus-send --system --reply-timeout=10000 --dest=org.%{vendor}hosted.certmonger \
+    --print-reply=o /org/%{vendor}hosted/certmonger org.%{vendor}hosted.certmonger.find_ca_by_nickname \
                   string:dogtag-ipa-renew-agent 2> /dev/null | sed -r 's,^ +,,g' || true`
     if test -n "$objpath" ; then
-        dbus-send --system --dest=org.openeulerhosted.certmonger --print-reply /org/openeulerhosted/certmonger \
-                                  org.openeulerhosted.certmonger.remove_known_ca objpath:"$objpath" >/dev/null 2> /dev/null
+        dbus-send --system --dest=org.%{vendor}hosted.certmonger --print-reply /org/%{vendor}hosted/certmonger \
+                                  org.%{vendor}hosted.certmonger.remove_known_ca objpath:"$objpath" >/dev/null 2> /dev/null
     fi
     for cafile in %{_localstatedir}/lib/certmonger/cas/* ; do
         if grep -q '^id=dogtag-ipa-renew-agent$' "$cafile" ; then
@@ -108,6 +113,9 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Fri Nov 18 2022 yaoxin <yaoxin30@h-partners.com> - 0.79.11-5
+- Replace openeuler with vendor
+
 * Sat Sep 11 2021 wutao <wutao61@huawei.com> - 0.79.11-4
 - delete help package provides certmonger to solve conflicts
 
