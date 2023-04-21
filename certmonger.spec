@@ -1,6 +1,6 @@
 Name:                   certmonger
 Version:                0.79.15
-Release:                1
+Release:                2
 Summary:                Certificate status monitor and PKI enrollment client
 License:                GPLv3+
 URL:                    http://pagure.io/certmonger/
@@ -33,6 +33,9 @@ This package provides docs for user of certmonger.
 %autosetup -n certmonger-certmonger-%{version} -p1
 
 %build
+%if "%toolchain" == "clang"
+    CFLAGS="$CFLAGS -Wno-error=int-conversion"
+%endif
 autoreconf -i -f
 %configure \
     --enable-systemd --enable-tmpfiles --with-homedir=/var/run/certmonger \
@@ -107,6 +110,9 @@ fi
 %{_mandir}/man*/*
 
 %changelog
+* Fri Apr 21 2023 jammyjellyfish <jammyjellyfish255@outlook.com> - 0.79.15-2
+- Fix clang build error
+
 * Mon Feb 06 2023 Ge Wang<wangge20@h-partners.com> -0.79.15-1
 - Update to 0.79.15 due to openssl update to version 3.0.7
 
